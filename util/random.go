@@ -27,7 +27,7 @@ func RandomString(n int) string {
 		sb.WriteByte(c)
 	}
 
-	return sb.String() 
+	return sb.String()
 }
 
 // RandomOwner generates a random owner name
