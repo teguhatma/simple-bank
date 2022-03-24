@@ -27,3 +27,16 @@ Content-Type: application/json
     "amount": 20,
     "currency": "USD"
 }
+
+###
+
+POST http://0.0.0.0:8080/users HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "username": "john",
+    "full_name": "john wick",
+    "email": "johnwick@gmail.com",
+    "password": "adminadmin"
+}
