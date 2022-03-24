@@ -3,8 +3,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "owner": "Michael Lee",
-    "currency": "USD"
+    "owner": "ridcjh",
+    "currency": "IDR"
 }
 
 ### 
