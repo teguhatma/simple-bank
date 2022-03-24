@@ -9,10 +9,10 @@ import (
 	"github.com/teguhatma/simple-bank/util"
 )
 
-func createRandomTransfer(t *testing.T, account1, account2 Account) Transfer {
+func createRandomTransfer(t *testing.T, id, id2 int64) Transfer {
 	arg := CreateTransferParams{
-		FromAccountID: account1.ID,
-		ToAccountID:   account2.ID,
+		FromAccountID: id,
+		ToAccountID:   id2,
 		Amount:        util.RandomMoney(),
 	}
 
@@ -53,17 +53,17 @@ func TestGetTransfer(t *testing.T) {
 }
 
 func TestListTransfer(t *testing.T) {
-	account1 := createRandomAccount(t)
-	account2 := createRandomAccount(t)
+	id := createRandomAccount(t)
+	id2 := createRandomAccount(t)
 
 	for i := 0; i < 5; i++ {
-		createRandomTransfer(t, account1, account2)
-		createRandomTransfer(t, account2, account1)
+		createRandomTransfer(t, id, id2)
+		createRandomTransfer(t, id2, id)
 	}
 
 	arg := ListTransfersParams{
-		FromAccountID: account1.ID,
-		ToAccountID:   account1.ID,
+		FromAccountID: id,
+		ToAccountID:   id,
 		Limit:         5,
 		Offset:        5,
 	}
@@ -74,6 +74,6 @@ func TestListTransfer(t *testing.T) {
 
 	for _, transfer := range transfers {
 		require.NotEmpty(t, transfer)
-		require.True(t, transfer.FromAccountID == account1.ID || transfer.ToAccountID == account1.ID)
+		require.True(t, transfer.FromAccountID == id || transfer.ToAccountID == id)
 	}
 }

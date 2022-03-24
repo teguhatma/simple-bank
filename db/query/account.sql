@@ -5,7 +5,7 @@ INSERT INTO accounts (
     currency
 ) VALUES (
     $1, $2, $3
-) RETURNING *;
+) RETURNING id;
 
 
 -- name: GetAccount :one

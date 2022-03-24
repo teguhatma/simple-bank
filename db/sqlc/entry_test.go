@@ -9,9 +9,9 @@ import (
 	"github.com/teguhatma/simple-bank/util"
 )
 
-func createRandomEntry(t *testing.T, account Account) Entry {
+func createRandomEntry(t *testing.T, id int64) Entry {
 	arg := CreateEntryParams{
-		AccountID: account.ID,
+		AccountID: id,
 		Amount:    util.RandomMoney(),
 	}
 
@@ -29,8 +29,8 @@ func createRandomEntry(t *testing.T, account Account) Entry {
 }
 
 func TestCreateEntry(t *testing.T) {
-	account := createRandomAccount(t)
-	createRandomEntry(t, account)
+	id := createRandomAccount(t)
+	createRandomEntry(t, id)
 }
 
 func TestGetEntry(t *testing.T) {
@@ -47,13 +47,13 @@ func TestGetEntry(t *testing.T) {
 }
 
 func TestListEntries(t *testing.T) {
-	account := createRandomAccount(t)
+	id := createRandomAccount(t)
 	for i := 0; i < 10; i++ {
-		createRandomEntry(t, account)
+		createRandomEntry(t, id)
 	}
 
 	arg := ListEntriesParams{
-		AccountID: account.ID,
+		AccountID: id,
 		Limit:     5,
 		Offset:    5,
 	}
