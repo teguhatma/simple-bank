@@ -3,14 +3,27 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "owner": "John Mark",
+    "owner": "Michael Lee",
     "currency": "USD"
 }
 
 ### 
 
-GET http://0.0.0.0:8080/accounts/10 HTTP/1.1
+GET http://0.0.0.0:8080/accounts/1 HTTP/1.1
 
 ###
 
-GET http://0.0.0.0:8080/accounts?page_id=100&page_size=9 HTTP/1.1
+GET http://0.0.0.0:8080/accounts?page_id=1&page_size=9 HTTP/1.1
+
+###
+
+POST http://0.0.0.0:8080/transfers HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "from_account_id": 1,
+    "to_account_id": 1,
+    "amount": 20,
+    "currency": "USD"
+}
