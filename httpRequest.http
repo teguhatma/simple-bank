@@ -1,0 +1,16 @@
+POST http://0.0.0.0:8080/accounts HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "owner": "John Mark",
+    "currency": "USD"
+}
+
+### 
+
+GET http://0.0.0.0:8080/accounts/10 HTTP/1.1
+
+###
+
+GET http://0.0.0.0:8080/accounts?page_id=100&page_size=9 HTTP/1.1
