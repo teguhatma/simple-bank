@@ -13,6 +13,7 @@ var ErrInvalidToken = errors.New("token is invalid")
 // Payload contains the payload of the token
 type Payload struct {
 	ID        uuid.UUID `json:"id"`
+	AccountID int64     `json:"account_id"`
 	Username  string    `json:"username"`
 	IssuedAt  time.Time `json:"issued_at"`
 	ExpiredAt time.Time `json:"expired_at"`
