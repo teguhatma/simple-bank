@@ -41,6 +41,39 @@ func (server *Server) createUser(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, resp)
 }
 
+func (server *Server) loginUser(ctx *gin.Context) {
+	var req request.LoginUserRequest
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		errorResponse(ctx, http.StatusBadRequest, err)
+		return
+	}
+
+	user, err := server.store.GetUser(ctx, req.Username)
+	if err != nil {
+		errorResponse(ctx, http.StatusInternalServerError, err)
+		return
+	}
+
+	err = util.CheckPassword(req.Password, user.HashedPassword)
+	if err != nil {
+		errorResponse(ctx, http.StatusUnauthorized, err)
+		return
+	}
+
+	accessToken, err := server.tokenMaker.CreateToken(user.Username, server.config.AccessTokenDuration)
+	if err != nil {
+		errorResponse(ctx, http.StatusInternalServerError, err)
+		return
+	}
+
+	resp := response.LoginUserResponse{
+		AccessToken: accessToken,
+		User:        *userResponse(user),
+	}
+
+	ctx.JSON(http.StatusOK, resp)
+}
+
 func userResponse(user db.User) *response.UserResponse {
 	return &response.UserResponse{
 		Username:          user.Username,
